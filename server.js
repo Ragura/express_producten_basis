@@ -14,14 +14,18 @@ const app = express();
 // als ze niet bestaat, neem een standaardwaarde
 const port = process.env.PORT || 3333;
 
-// Require een eigen .js bestand dat routergegevens exporteert
-const producten = require('./routes/producten');
-
 // de use() methode van een express app registreert middleware.
 // Middleware zijn functies die worden uitgevoerd bij elke request aan de server
 // Er kunnen meerdere middleware functies geregistreerd worden
 // Ze worden uitgevoerd in volgorde van registratie
 app.use(cors());
+
+// express.json() is een middleware die requests met een JSON-payload interpreteert
+// en beschikbaar stelt binnen het req.body object.
+app.use(express.json());
+
+// Require een eigen .js bestand dat routergegevens exporteert
+const producten = require('./routes/producten');
 
 // de get() methode registreert een route met een bijhorende afhandelfunctie (handler)
 // zulke handler functie neemt als parameters minstens req en res aan (de request en de response)
